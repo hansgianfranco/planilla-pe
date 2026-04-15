@@ -1,0 +1,74 @@
+{
+  "name": "planilla-pe",
+  "version": "1.0.0",
+  "description": "Utilidades de planilla para Perú en TypeScript: cálculo de sueldo neto, AFP/ONP, CTS, gratificaciones y aportes.",
+  "keywords": [
+    "planilla",
+    "peru",
+    "payroll",
+    "afp",
+    "onp",
+    "cts",
+    "gratificacion",
+    "essalud",
+    "rrhh",
+    "sueldos",
+    "peru payroll",
+    "peru salary",
+    "laboral",
+    "typescript",
+    "javascript",
+    "utils",
+    "fns"
+  ],
+  "homepage": "https://github.com/hansgianfranco/planilla-pe",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hansgianfranco/planilla-pe.git"
+  },
+  "bugs": {
+    "url": "https://github.com/hansgianfranco/planilla-pe/issues"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Franco Caballero",
+    "email": "hansgianfranco@users.noreply.github.com",
+    "url": "https://francocaballero.dev"
+  },
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "sideEffects": false,
+  "engines": {
+    "node": ">=18"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts --format esm --dts --minify",
+    "dev": "tsc --watch",
+    "test": "vitest",
+    "test:watch": "vitest --watch",
+    "lint": "eslint src --ext .ts",
+    "lint:fix": "eslint src --ext .ts --fix",
+    "prepublishOnly": "npm run build"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^8.58.2",
+    "@typescript-eslint/parser": "^8.58.2",
+    "eslint": "^9.39.4",
+    "tsup": "^8.5.1",
+    "typescript": "^5.0.0",
+    "vitest": "^1.6.0"
+  }
+}
