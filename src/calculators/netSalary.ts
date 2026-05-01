@@ -1,5 +1,6 @@
 import { EmployeeInput } from "../types/employee";
-import { ONP_RATE, AFP_RATES } from "../constants/rates";
+import { ONP_RATE } from "../constants/rates";
+import { calculateAFP } from "./afp";
 import { calculateGrossSalary } from "../core/salary";
 import { round } from "../utils/rounding";
 
@@ -14,7 +15,7 @@ export function calculateNetSalary(input: EmployeeInput) {
   }
 
   if (pensionSystem === "AFP" && afpType) {
-    pension = round(gross * AFP_RATES[afpType]);
+    pension = calculateAFP(gross, afpType).total;
   }
 
   const net = round(gross - pension);

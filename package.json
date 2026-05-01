@@ -1,6 +1,6 @@
 {
   "name": "planilla-pe",
-  "version": "1.0.1",
+  "version": "1.2.0",
   "description": "Utilidades de planilla para Perú en TypeScript: cálculo de sueldo neto, AFP/ONP, CTS, gratificaciones y aportes.",
   "keywords": [
     "planilla",
