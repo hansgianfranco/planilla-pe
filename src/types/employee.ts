@@ -7,4 +7,5 @@ export interface EmployeeInput {
   afpType?: "integra" | "prima" | "profuturo" | "habitat";
 
   familyAllowance?: boolean;
+  hasEPS?: boolean;
 }

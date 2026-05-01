@@ -1,11 +1,12 @@
-# 📦 planilla-pe
+# planilla-pe
 
 Utilidades de planilla para Perú en **TypeScript**.
 Calcula sueldo neto, AFP/ONP, CTS, gratificaciones y aportes de forma simple y tipada.
+Actualizado a valores **2026**.
 
 ---
 
-## 🚀 Instalación
+## Instalación
 
 ```bash
 npm install planilla-pe
@@ -13,20 +14,22 @@ npm install planilla-pe
 
 ---
 
-## ✨ Características
+## Características
 
-* Enfocado en normativa peruana
+* Enfocado en normativa peruana (Actualizado 2026)
 * Cálculo de sueldo neto (AFP / ONP)
-* CTS (Compensación por Tiempo de Servicios)
-* Gratificaciones con Essalud
-* Asignación familiar
+* CTS (Compensación por Tiempo de Servicios) corregido con 1/6 de gratificación
+* Gratificaciones con Bonificación Extraordinaria (Essalud / EPS)
+* Asignación familiar dinámica (10% de la RMV)
+* Soporte para EPS (Entidades Prestadoras de Salud)
+* Redondeo financiero de 2 decimales integrado
 * Tipado fuerte con TypeScript
 * Sin dependencias
 * Modular y extensible
 
 ---
 
-## 📌 Uso básico
+## Uso básico
 
 ```ts
 import { calculatePayroll } from "planilla-pe";
@@ -41,28 +44,28 @@ const result = calculatePayroll({
 console.log(result);
 ```
 
-### Resultado
+### Resultado (Valores 2026)
 
 ```ts
 {
-  gross: 2102.5,
-  net: 1832.175,
+  gross: 2113,
+  net: 1838.31,
   deductions: {
-    pension: 270.325,
-    total: 270.325
+    pension: 274.69,
+    total: 274.69
   },
   contributions: {
-    essalud: 189.225,
-    total: 189.225
+    essalud: 190.17,
+    total: 190.17
   }
 }
 ```
 
 ---
 
-## 🧮 Funciones disponibles
+## Funciones disponibles
 
-### 🔹 `calculatePayroll`
+### `calculatePayroll`
 
 Cálculo completo de planilla.
 
@@ -72,7 +75,7 @@ calculatePayroll(input: EmployeeInput)
 
 ---
 
-### 🔹 `calculateNetSalary`
+### `calculateNetSalary`
 
 Calcula sueldo neto directamente.
 
@@ -87,27 +90,32 @@ calculateNetSalary({
 
 ---
 
-### 🔹 `calculateCTS`
+### `calculateCTS`
+
+Calcula la CTS semestral incluyendo el 1/6 de la gratificación proyectada.
 
 ```ts
 import { calculateCTS } from "planilla-pe";
 
-calculateCTS(2000); // 1000
+calculateCTS(2000); // 1166.67
 ```
 
 ---
 
-### 🔹 `calculateGratification`
+### `calculateGratification`
+
+Calcula gratificación más bonificación extraordinaria (9% Essalud o 6.75% EPS).
 
 ```ts
 import { calculateGratification } from "planilla-pe";
 
 calculateGratification(1000); // 1090
+calculateGratification(1000, true); // 1067.5 (con EPS)
 ```
 
 ---
 
-### 🔹 AFP / ONP
+### AFP / ONP
 
 ```ts
 import { calculateAFP, calculateONP } from "planilla-pe";
@@ -118,7 +126,7 @@ calculateONP(1000);
 
 ---
 
-## 🧠 Tipos
+## Tipos
 
 ```ts
 import type { EmployeeInput } from "planilla-pe";
@@ -128,12 +136,13 @@ const employee: EmployeeInput = {
   pensionSystem: "AFP",
   afpType: "habitat",
   familyAllowance: true,
+  hasEPS: false,
 };
 ```
 
 ---
 
-## 📊 Constantes
+## Constantes (2026)
 
 ```ts
 import {
@@ -143,11 +152,16 @@ import {
   IGV,
   ESSALUD
 } from "planilla-pe";
+
+// Valores 2026
+// UIT = 5500
+// RMV = 1130
+// FAMILY_ALLOWANCE = 113
 ```
 
 ---
 
-## 📁 Estructura
+## Estructura
 
 ```bash
 src/
@@ -155,16 +169,17 @@ src/
   calculators/
   constants/
   types/
+  utils/
 ```
 
 ---
 
-## 📊 Constantes
+## Valores por defecto (2026)
 
 ```ts
-UIT = 5150;              // Unidad Impositiva Tributaria (base para impuestos)
-RMV = 1025;              // Remuneración Mínima Vital (sueldo mínimo)
-FAMILY_ALLOWANCE = 102.5; // Asignación familiar (10% de la RMV)
+UIT = 5500;              // Unidad Impositiva Tributaria (base para impuestos)
+RMV = 1130;              // Remuneración Mínima Vital (sueldo mínimo)
+FAMILY_ALLOWANCE = 113;  // Asignación familiar (10% de la RMV)
 
 IGV = 0.18;              // Impuesto General a las Ventas (18%)
 ESSALUD = 0.09;          // Aporte del empleador a salud (9%)
@@ -180,15 +195,15 @@ AFP_RATES = {
 
 ---
 
-## ⚠️ Notas
+## Notas
 
-* Las tasas de AFP son **referenciales** y pueden variar.
-* La RMV y UIT pueden cambiar según normativa vigente.
-* Esta librería es ideal para cálculos y simulaciones, no reemplaza asesoría contable.
+* Las tasas de AFP son **referenciales** (promedio 13%) y pueden variar mensualmente.
+* La RMV y UIT están actualizadas al periodo fiscal **2026**.
+* Esta librería es ideal para cálculos y simulaciones, no reemplaza asesoría contable profesional.
 
 ---
 
-## 🧪 Testing
+## Testing
 
 ```bash
 npm run test
@@ -196,7 +211,7 @@ npm run test
 
 ---
 
-## 📦 Build
+## Build
 
 ```bash
 npm run build
@@ -204,7 +219,7 @@ npm run build
 
 ---
 
-## 🤝 Contribución
+## Contribución
 
 Damos la bienvenida a contribuciones de la comunidad 🙌
 
@@ -213,32 +228,8 @@ Antes de contribuir, por favor revisa:
 - [CONTRIBUTING.md](CONTRIBUTING.md)
 - [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)
 
-Todas las contribuciones deben seguir las guías del proyecto y mantener la calidad y consistencia del código.
-
 ---
 
-## 🔐 Seguridad
-
-Si encuentras una vulnerabilidad de seguridad, por favor NO abras un issue público.
-
-Lee la política de seguridad aquí:
-
-- [SECURITY.md](SECURITY.md)
-
-Reporta las vulnerabilidades de forma responsable siguiendo las instrucciones del archivo.
-
----
-
-## 💬 Soporte
-
-¿Necesitas ayuda o tienes dudas?
-
-- Abre un issue: https://github.com/hansgianfranco/sunat-utils/issues
-- Revisa la documentación en el README
-- Consulta los ejemplos del repositorio
-
-## 📄 Licencia
+## Licencia
 
 MIT © Franco Caballero
-
----

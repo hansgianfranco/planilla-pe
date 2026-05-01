@@ -3,7 +3,7 @@ import { calculateCTS } from "../src";
 
 describe("calculateCTS", () => {
   it("should calculate CTS correctly", () => {
-    expect(calculateCTS(2000)).toBe(1000);
+    expect(calculateCTS(2000)).toBeCloseTo(1166.67, 2);
   });
 
   it("should handle zero salary", () => {

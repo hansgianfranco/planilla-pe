@@ -40,6 +40,8 @@ describe("calculatePayroll", () => {
       familyAllowance: true,
     });
 
-    expect(result.gross).toBe(1102.5);
+    expect(result.gross).toBe(1113);
+    expect(result.deductions.pension).toBe(144.69);
+    expect(result.net).toBe(968.31);
   });
 });

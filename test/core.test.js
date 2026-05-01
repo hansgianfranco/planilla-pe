@@ -13,7 +13,7 @@ describe("core functions", () => {
       familyAllowance: true,
     });
 
-    expect(result).toBe(1102.5);
+    expect(result).toBe(1113);
   });
 
   it("should calculate deductions", () => {
